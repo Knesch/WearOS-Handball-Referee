@@ -23,4 +23,6 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Handball-Schiedsrichter"
-include(":app")
+include(":wear")
+include(":mobile")
+include(":shared")

@@ -1,0 +1,8 @@
+<resources>
+    <string name="install_on_watch">Auf Smartwatch installieren</string>
+    <string name="watch_app_not_found">Handball Schiedsrichter Wear OS App nicht gefunden.</string>
+    <string name="no_watches_found">Keine verbundenen Uhren gefunden.</string>
+    <string name="refresh_list">Liste aktualisieren</string>
+    <string name="app_installed">Installiert</string>
+    <string name="app_not_installed">Nicht installiert</string>
+</resources>

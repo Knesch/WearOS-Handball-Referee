@@ -1,9 +1,11 @@
 # Handball Schiedsrichter (Wear OS)
 
+Diese App dient zum Tore zählen und Zeit stoppen auf einer Wear OS-Uhr.
+
 Die Motivation für diese App ist, dass das heutige Handballspiel sehr schnell geworden ist und es
 uns als Schiedsrichtern kaum noch möglich ist, die Tore im laufenden Spiel auf der Notizkarte zu
 notieren, ohne Gefahr zu laufen, kritische Situationen nicht wahrzunehmen.
-Es gibt diverse Schiedsrichter-Apps, jedoch keine passende speziell für Handballschiedsrichter. Aus
+Es gibt diverse Wear OS Schiedsrichter-Apps, jedoch keine passende speziell für Handballschiedsrichter. Aus
 diesem Grund habe ich mich entschlossen, eine eigene zu entwickeln.
 Für Garmin-Uhren gibt es alternativ "Hektors Ref Watch", was viele Kollegen empfehlen. Hier ist nun
 eine App für Wear OS.
@@ -16,8 +18,7 @@ klassische Notizkarte oder das Tape auf dem Uhrarmband verwendet werden.
 
 ## Features
 
-* **Startbildschirm**: Schneller Einstieg über "Neues Spiel" oder Anpassung der Teams über "
-  Konfiguration".
+* **Startbildschirm**: Schneller Einstieg über "Neues Spiel" oder Anpassung der Teams über "Konfiguration".
 * **Trikotfarben-Anpassung**: In den Einstellungen können die Trikotfarben für Heim- und
   Gastmannschaft individuell gewählt werden (Weiß, Schwarz, Rot, Blau, Gelb, Grün, Orange, Lila).
 * **Visuelle Orientierung**: Die Tor-Bereiche im Spielbildschirm sind in der jeweiligen Trikotfarbe

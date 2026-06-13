@@ -1,16 +1,17 @@
 package de.knesch.handball.referee.mobile
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -33,6 +34,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.wear.remote.interactions.RemoteActivityHelper
@@ -47,9 +49,13 @@ import kotlinx.coroutines.withContext
 import java.util.concurrent.Executors
 import androidx.core.net.toUri
 
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.safeDrawingPadding
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContent {
             MaterialTheme {
                 Surface(
@@ -125,13 +131,22 @@ fun WatchStatusScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .safeDrawingPadding()
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             text = stringResource(id = de.knesch.handball.referee.shared.R.string.app_name),
             style = MaterialTheme.typography.headlineMedium,
-            modifier = Modifier.padding(bottom = 24.dp)
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+
+        Image(
+            painter = painterResource(id = de.knesch.handball.referee.shared.R.drawable.tile_preview),
+            contentDescription = "Tile Preview",
+            modifier = Modifier
+                .size(200.dp)
+                .padding(bottom = 24.dp)
         )
 
         if (isLoading) {
@@ -146,14 +161,17 @@ fun WatchStatusScreen() {
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                items(devices) { device ->
-                    DeviceItem(device, onInstallClick = {
-                        val intent = Intent(Intent.ACTION_VIEW)
-                            .addCategory(Intent.CATEGORY_BROWSABLE)
-                            .setData("market://details?id=de.knesch.handball.referee".toUri())
+                items(items = devices) { device ->
+                    DeviceItem(
+                        device = device,
+                        onInstallClick = {
+                            val intent = Intent(Intent.ACTION_VIEW)
+                                .addCategory(Intent.CATEGORY_BROWSABLE)
+                                .setData("market://details?id=de.knesch.handball.referee".toUri())
 
-                        remoteActivityHelper.startRemoteActivity(intent, device.id)
-                    })
+                            remoteActivityHelper.startRemoteActivity(intent, device.id)
+                        }
+                    )
                 }
             }
 
@@ -170,43 +188,44 @@ fun WatchStatusScreen() {
 @Composable
 fun DeviceItem(device: WatchDevice, onInstallClick: () -> Unit) {
     Card(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Column(
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth()
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
+        modifier = Modifier.fillMaxWidth(),
+        content = {
+            Column(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
             ) {
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(text = device.displayName, style = MaterialTheme.typography.titleMedium)
-                    Text(
-                        text = if (device.isAppInstalled) stringResource(id = R.string.app_installed) else stringResource(
-                            id = R.string.app_not_installed
-                        ),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = if (device.isAppInstalled) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error
-                    )
-                }
-
-                if (!device.isAppInstalled) {
-                    Button(onClick = onInstallClick) {
-                        Text(stringResource(id = R.string.install_on_watch))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(text = device.displayName, style = MaterialTheme.typography.titleMedium)
+                        Text(
+                            text = if (device.isAppInstalled) stringResource(id = R.string.app_installed) else stringResource(
+                                id = R.string.app_not_installed
+                            ),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = if (device.isAppInstalled) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error
+                        )
                     }
-                } else {
-                    Icon(
-                        imageVector = Icons.Default.CheckCircle,
-                        contentDescription = "Installiert",
-                        tint = MaterialTheme.colorScheme.primary
-                    )
+
+                    if (!device.isAppInstalled) {
+                        Button(onClick = onInstallClick) {
+                            Text(stringResource(id = R.string.install_on_watch))
+                        }
+                    } else {
+                        Icon(
+                            imageVector = Icons.Default.CheckCircle,
+                            contentDescription = "Installiert",
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
                 }
             }
         }
-    }
+    )
 }
 
 private suspend fun getWatchDevices(context: android.content.Context): List<WatchDevice> =

@@ -21,8 +21,8 @@ android {
         applicationId = "de.knesch.handball.referee"
         minSdk = 30
         targetSdk = 36
-        versionCode = 3
-        versionName = "1.1.0"
+        versionCode = 5
+        versionName = "1.2.0"
     }
 
     buildTypes {

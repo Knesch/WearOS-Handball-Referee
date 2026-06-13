@@ -2,7 +2,6 @@
 <lint>
     <!-- Ignore the IconLocation for the Tile preview images -->
     <issue id="IconLocation">
-        <ignore path="res/drawable/tile_preview.png" />
-        <ignore path="res/drawable-round/tile_preview.png" />
+        <!-- Files moved to :shared -->
     </issue>
 </lint>

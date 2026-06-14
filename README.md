@@ -16,7 +16,7 @@ klassische Notizkarte oder das Tape auf dem Uhrarmband verwendet werden.
 
 Über Feedback und Feature-Requests freue ich mich jederzeit.
 
-## Features
+## Features (Wear OS App)
 
 * **Startbildschirm**: Schneller Einstieg über "Neues Spiel" oder Anpassung der Teams über "Konfiguration".
 * **Trikotfarben-Anpassung**: In den Einstellungen können die Trikotfarben für Heim- und
@@ -43,7 +43,15 @@ klassische Notizkarte oder das Tape auf dem Uhrarmband verwendet werden.
 * **Tile & Complication**: Schneller Zugriff auf die App und Status-Informationen direkt vom
   Zifferblatt.
 
-## Bedienung
+## Features (Companion App - Smartphone)
+
+* **Geräteverwaltung**: Automatische Erkennung von verbundenen Wear OS Uhren.
+* **Installations-Assistent**: Prüft, ob die Wear OS App auf der Uhr installiert ist, und bietet einen direkten Link zum Play Store an.
+* **Modernes Design**: Nutzt Edge-to-Edge Layout für eine optimale Ausnutzung des Bildschirms.
+* **Dark-Mode Support**: Die App passt sich automatisch den Systemeinstellungen des Smartphones an (Hell/Dunkel).
+* **Dynamic Color**: Unterstützt Material You (ab Android 12) für ein harmonisches Farbschema basierend auf dem Hintergrundbild des Nutzers.
+
+## Bedienung (Wear OS)
 
 | Aktion                            | Ergebnis                                 |
 |:----------------------------------|:-----------------------------------------|
@@ -56,8 +64,8 @@ klassische Notizkarte oder das Tape auf dem Uhrarmband verwendet werden.
 
 ## Technische Details
 
-* **Plattform**: Wear OS 4.0+ (API 30+)
-* **UI Framework**: Jetpack Compose für Wear OS (Material 3)
+* **Plattform**: Wear OS 4.0+ (API 30+) / Android 8.0+ (API 26+)
+* **UI Framework**: Jetpack Compose (Material 3)
 * **Navigation**: Wear OS Navigation mit Swipe-to-Dismiss Support
 * **Architektur**: MVVM (Model-View-ViewModel)
 * **Sprache**: Kotlin
@@ -67,7 +75,7 @@ klassische Notizkarte oder das Tape auf dem Uhrarmband verwendet werden.
 
 1. Projekt in **Android Studio** öffnen.
 2. Ein **Wear OS Emulator** oder eine echte Uhr (via ADB) verbinden.
-3. Den `:wear` Run-Configuration auswählen und starten.
+3. Die entsprechenden Module (`:wear` oder `:mobile`) bauen und installieren.
 
 ## Unit Tests
 

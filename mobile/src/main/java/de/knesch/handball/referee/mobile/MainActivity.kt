@@ -61,7 +61,7 @@ class MainActivity : ComponentActivity() {
             HandballSchiedsrichterTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.background,
                 ) {
                     WatchStatusScreen()
                 }
@@ -75,7 +75,7 @@ fun WatchStatusScreen() {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     var devices by remember { mutableStateOf<List<WatchDevice>>(emptyList()) }
-    var isLoading by remember { mutableStateOf(true) }
+    var isLoading by remember { mutableStateOf(value = true) }
 
     val remoteActivityHelper = remember {
         RemoteActivityHelper(context, Executors.newSingleThreadExecutor())
@@ -163,16 +163,13 @@ fun WatchStatusScreen() {
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(items = devices) { device ->
-                    DeviceItem(
-                        device = device,
-                        onInstallClick = {
-                            val intent = Intent(Intent.ACTION_VIEW)
-                                .addCategory(Intent.CATEGORY_BROWSABLE)
-                                .setData("market://details?id=de.knesch.handball.referee".toUri())
+                    DeviceItem(device) {
+                        val intent = Intent(Intent.ACTION_VIEW)
+                            .addCategory(Intent.CATEGORY_BROWSABLE)
+                            .setData("market://details?id=de.knesch.handball.referee".toUri())
 
-                            remoteActivityHelper.startRemoteActivity(intent, device.id)
-                        }
-                    )
+                        remoteActivityHelper.startRemoteActivity(intent, device.id)
+                    }
                 }
             }
 
@@ -245,8 +242,8 @@ private suspend fun getWatchDevices(context: android.content.Context): List<Watc
             val capabilityInfo = Tasks.await(
                 capabilityClient.getCapability("handball_referee_app", CapabilityClient.FILTER_ALL)
             )
-            capabilityInfo.nodes.map { it.id }.toSet()
-        } catch (e: Exception) {
+            capabilityInfo.nodes.asSequence().map { it.id }.toSet()
+        } catch (_: Exception) {
             emptySet()
         }
 

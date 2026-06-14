@@ -67,6 +67,7 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.compose)
     implementation(libs.compose.navigation)
     implementation(libs.play.services.wearable)
+    implementation(libs.androidx.fragment.ktx)
     testImplementation(libs.junit)
     testImplementation(libs.junit.jupiter)
     androidTestImplementation(platform(libs.compose.bom))

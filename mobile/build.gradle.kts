@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.material.icons.core)
     implementation(libs.activity.compose)
     implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.fragment.ktx)
 
     implementation(libs.wear.remote.interactions)
     implementation(libs.play.services.wearable)

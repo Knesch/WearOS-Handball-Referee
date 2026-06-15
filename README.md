@@ -86,3 +86,76 @@ Die Logik der App ist durch umfangreiche Tests abgesichert. Führe sie mit folge
 ```
 
 ---
+
+# Handball Referee (Wear OS)
+
+This app is used for counting goals and stopping time on a Wear OS watch.
+
+The motivation for this app is that today's handball game has become very fast and it is hardly possible for us as referees to note down goals on the score card during the game without running the risk of not perceiving critical situations.
+There are various Wear OS referee apps, but no suitable one specifically for handball referees. For this reason, I decided to develop my own.
+For Garmin watches, there is alternatively "Hektors Ref Watch", which many colleagues recommend. Here is now an app for Wear OS.
+
+The goal of the app is simple and intuitive operation during the game. For this reason, it primarily includes goal tracking and the stopwatch. For penalties, the classic score card or tape on the watch strap should still be used.
+
+I am always happy to receive feedback and feature requests.
+
+## Features (Wear OS App)
+
+* **Start screen**: Quick start via "New Game" or customization of teams via "Configuration".
+* **Jersey color customization**: In the settings, the jersey colors for the home and guest teams can be selected individually (White, Black, Red, Blue, Yellow, Green, Orange, Purple).
+* **Visual orientation**: The goal areas in the game screen are highlighted in the respective jersey color, with automatic contrast adjustment of the font (Black/White).
+* **Precise timing**: Start and stop the game time by simply tapping on the time display.
+* **Goal tracking**:
+    * Tapping on the left (Home) or right (Guest) half of the screen adds a goal.
+    * Long pressing on the respective goal area corrects the score (subtract goal).
+* **Haptic feedback**:
+    * Short vibration for confirmation when adding a goal.
+    * Long vibration for goal correction.
+* **Halftime function**: Accessible via the menu. Resets only the clock, the score remains for the second half.
+* **Always-On Display**: The display remains permanently active while using the app so that the time and score can be read at any time.
+* **Secure reset**: Complete reset of score and time after confirming a security prompt in the menu.
+* **Navigation**: Intuitive control via buttons and the typical Wear OS swipe gesture to return.
+* **Standalone App**: Works completely independently of the smartphone.
+* **Tile & Complication**: Quick access to the app and status information directly from the watch face.
+
+## Features (Companion App - Smartphone)
+
+* **Device management**: Automatic detection of connected Wear OS watches.
+* **Installation Assistant**: Checks whether the Wear OS app is installed on the watch and offers a direct link to the Play Store.
+* **Modern Design**: Uses edge-to-edge layout for optimal use of the screen.
+* **Dark-Mode Support**: The app automatically adapts to the smartphone's system settings (Light/Dark).
+* **Dynamic Color**: Supports Material You (Android 12+) for a harmonious color scheme based on the user's wallpaper.
+
+## Operation (Wear OS)
+
+| Action                            | Result                                 |
+|:----------------------------------|:-----------------------------------------|
+| **Tap on time**               | Start / Stop the clock                    |
+| **Tap on goal half**         | Add goal (+1)                      |
+| **Long press on goal half** | Subtract goal (-1)                        |
+| **Menu -> Halftime**              | Set clock to 00:00 (score remains) |
+| **Menu -> Reset**                 | Clear everything (after confirmation)         |
+| **Swipe from left**             | Back to previous screen         |
+
+## Technical Details
+
+* **Platform**: Wear OS 4.0+ (API 30+) / Android 8.0+ (API 26+)
+* **UI Framework**: Jetpack Compose (Material 3)
+* **Navigation**: Wear OS Navigation with Swipe-to-Dismiss support
+* **Architecture**: MVVM (Model-View-ViewModel)
+* **Language**: Kotlin
+* **Tests**: JUnit 4 & JUnit 5 unit tests for logic and StopWatch
+
+## Installation for Developers
+
+1. Open project in **Android Studio**.
+2. Connect a **Wear OS Emulator** or a real watch (via ADB).
+3. Build and install the corresponding modules (`:wear` or `:mobile`).
+
+## Unit Tests
+
+The logic of the app is secured by extensive tests. Run them with the following command:
+
+```bash
+./gradlew test
+```

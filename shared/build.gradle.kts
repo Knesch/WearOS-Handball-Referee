@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "de.knesch.handball.referee.shared"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         minSdk = 26

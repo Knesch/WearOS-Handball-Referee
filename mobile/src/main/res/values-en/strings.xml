@@ -1,0 +1,7 @@
+<resources>
+    <string name="install_on_watch">Install on smartwatch</string>
+    <string name="no_watches_found">No connected watches found.</string>
+    <string name="refresh_list">Refresh list</string>
+    <string name="app_installed">Installed</string>
+    <string name="app_not_installed">Not installed</string>
+</resources>

@@ -1,6 +1,7 @@
 package de.knesch.handball.referee.presentation
 
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -16,9 +17,9 @@ import kotlin.time.Duration.Companion.milliseconds
 class MatchViewModel : ViewModel() {
     private val spiel = HandballMatch()
 
-    var toreHeim by mutableStateOf(0)
+    var toreHeim by mutableIntStateOf(0)
         private set
-    var toreGast by mutableStateOf(0)
+    var toreGast by mutableIntStateOf(0)
         private set
     var elapsedMillis by mutableLongStateOf(0L)
         private set

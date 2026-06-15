@@ -20,7 +20,7 @@ android {
     defaultConfig {
         applicationId = "de.knesch.handball.referee"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 6
         versionName = "1.2.0"
 

@@ -15,12 +15,12 @@ if (localPropertiesFile.exists()) {
 
 android {
     namespace = "de.knesch.handball.referee"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "de.knesch.handball.referee"
         minSdk = 26
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 8
         versionName = "1.3.0"
 
@@ -45,6 +45,11 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+    packaging {
+        jniLibs {
+            keepDebugSymbols.add("**/libandroidx.graphics.path.so")
+        }
     }
 }
 

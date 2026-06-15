@@ -2,7 +2,6 @@ package de.knesch.handball.referee.mobile
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -52,13 +51,57 @@ import androidx.core.net.toUri
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.safeDrawingPadding
 import de.knesch.handball.referee.mobile.ui.theme.HandballSchiedsrichterTheme
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.TextButton
+import android.content.Context
+import androidx.core.content.edit
+import android.content.res.Configuration
+import java.util.Locale
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+    override fun attachBaseContext(newBase: Context) {
+        val prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE)
+        val lang = prefs.getString("language", null)
+        if (lang != null) {
+            val locale = Locale.forLanguageTag(lang)
+            Locale.setDefault(locale)
+            val config = Configuration(newBase.resources.configuration)
+            config.setLocale(locale)
+            super.attachBaseContext(newBase.createConfigurationContext(config))
+        } else {
+            super.attachBaseContext(newBase)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        val prefs = getSharedPreferences("settings", MODE_PRIVATE)
         setContent {
             HandballSchiedsrichterTheme {
+                var showLanguageDialog by remember {
+                    mutableStateOf(prefs.getString("language", null) == null)
+                }
+
+                if (showLanguageDialog) {
+                    LanguageSelectionDialog(
+                        onLanguageSelected = { languageCode ->
+                            // In SharedPreferences speichern
+                            prefs.edit { putString("language", languageCode) }
+                            
+                            // Für das System setzen
+                            val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(languageCode)
+                            AppCompatDelegate.setApplicationLocales(appLocale)
+                            
+                            // Activity neu erstellen, um die Ressourcen neu zu laden
+                            recreate()
+                        }
+                    )
+                }
+
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
@@ -68,6 +111,31 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+}
+
+@Composable
+fun LanguageSelectionDialog(onLanguageSelected: (String) -> Unit) {
+    AlertDialog(
+        onDismissRequest = { },
+        title = { Text(text = stringResource(id = R.string.choose_language)) },
+        text = {
+            Column {
+                TextButton(
+                    onClick = { onLanguageSelected("de") },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(text = "\uD83C\uDDE9\uD83C\uDDEA " + stringResource(id = R.string.language_german))
+                }
+                TextButton(
+                    onClick = { onLanguageSelected("en") },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(text = "\uD83C\uDDEC\uD83C\uDDE7 " + stringResource(id = R.string.language_english))
+                }
+            }
+        },
+        confirmButton = { }
+    )
 }
 
 @Composable
@@ -155,7 +223,7 @@ fun WatchStatusScreen() {
         } else if (devices.isEmpty()) {
             Text(text = stringResource(id = R.string.no_watches_found))
             Button(onClick = { refreshDevices() }, modifier = Modifier.padding(top = 16.dp)) {
-                Text("Erneut suchen")
+                Text(text = stringResource(id = R.string.search_again))
             }
         } else {
             LazyColumn(
@@ -216,7 +284,7 @@ fun DeviceItem(device: WatchDevice, onInstallClick: () -> Unit) {
                     } else {
                         Icon(
                             imageVector = Icons.Default.CheckCircle,
-                            contentDescription = "Installiert",
+                            contentDescription = stringResource(id = R.string.installed_desc),
                             tint = MaterialTheme.colorScheme.primary
                         )
                     }
@@ -226,14 +294,14 @@ fun DeviceItem(device: WatchDevice, onInstallClick: () -> Unit) {
     )
 }
 
-private suspend fun getWatchDevices(context: android.content.Context): List<WatchDevice> =
+private suspend fun getWatchDevices(context: Context): List<WatchDevice> =
     withContext(Dispatchers.IO) {
         val nodeClient = Wearable.getNodeClient(context)
         val capabilityClient = Wearable.getCapabilityClient(context)
 
         val nodes = try {
             Tasks.await(nodeClient.connectedNodes)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             emptyList()
         }
 

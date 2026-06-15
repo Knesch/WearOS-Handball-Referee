@@ -4,4 +4,9 @@
     <string name="refresh_list">Refresh list</string>
     <string name="app_installed">Installed</string>
     <string name="app_not_installed">Not installed</string>
+    <string name="choose_language">Choose language</string>
+    <string name="language_german">German</string>
+    <string name="language_english">English</string>
+    <string name="search_again">Search again</string>
+    <string name="installed_desc">Installed</string>
 </resources>

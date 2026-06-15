@@ -27,6 +27,11 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    androidResources {
+        @Suppress("UnstableApiUsage")
+        localeFilters += listOf("de", "en")
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -65,6 +70,7 @@ dependencies {
     implementation(libs.activity.compose)
     implementation(libs.lifecycle.viewmodel.compose)
     implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.appcompat)
 
     implementation(libs.wear.remote.interactions)
     implementation(libs.play.services.wearable)

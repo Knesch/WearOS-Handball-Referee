@@ -15,12 +15,12 @@ if (localPropertiesFile.exists()) {
 
 android {
     namespace = "de.knesch.handball.referee"
-    compileSdk = 37
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "de.knesch.handball.referee"
         minSdk = 30
-        targetSdk = 37
+        targetSdk = 36
         versionCode = 7
         versionName = "1.3.0"
     }

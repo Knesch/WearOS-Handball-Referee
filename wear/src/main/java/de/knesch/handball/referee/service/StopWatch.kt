@@ -4,30 +4,31 @@ class StopWatch(private val timeProvider: () -> Long = { System.currentTimeMilli
 
     private var currentStartTime = 0L
     private var previousTimeElapsed = 0L
-    private var running = false
+    var isRunning = false
+        private set
 
     fun start() {
-        if (!running) {
+        if (!isRunning) {
             currentStartTime = timeProvider()
-            running = true
+            isRunning = true
         }
     }
 
     fun stop() {
-        if (running) {
+        if (isRunning) {
             previousTimeElapsed += timeProvider() - currentStartTime
-            running = false
+            isRunning = false
         }
     }
 
     fun reset() {
-        running = false
+        isRunning = false
         previousTimeElapsed = 0L
         currentStartTime = 0L
     }
 
     fun getTimeElapsed(): Long {
-        if (running) {
+        if (isRunning) {
             return previousTimeElapsed + (timeProvider() - currentStartTime)
         }
         return previousTimeElapsed

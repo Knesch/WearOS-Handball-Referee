@@ -128,8 +128,7 @@ fun MatchScreen(viewModel: MatchViewModel = viewModel()) {
     }
 
     Box(
-        modifier = Modifier
-            .keepScreenOn()
+        modifier = (if (viewModel.useOngoingActivity) Modifier else Modifier.keepScreenOn())
             .fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {

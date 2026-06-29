@@ -33,8 +33,10 @@ klassische Notizkarte oder das Tape auf dem Uhrarmband verwendet werden.
     * Lange Vibration bei Tor-Korrektur.
 * **Halbzeit-Funktion**: Über das Menü erreichbar. Setzt nur die Uhr zurück, der Spielstand bleibt
   für die zweite Halbzeit erhalten.
-* **Always-On Display**: Das Display bleibt während der Nutzung der App dauerhaft aktiv, damit die
-  Zeit und der Spielstand jederzeit ablesbar sind.
+* **Anzeigemodus-Konfiguration**: In den Einstellungen kann zwischen zwei Modi gewählt werden:
+    * **Always-On Display**: Das Display bleibt während der Nutzung der App dauerhaft aktiv.
+    * **Ongoing Activity**: Die App kann in den Hintergrund gewischt werden. Ein Icon auf dem Zifferblatt sowie ein Eintrag im Launcher ("Recents") erlauben den schnellen Rücksprung zum Spiel. Der aktuelle Spielstand wird dort monochrom angezeigt.
+* **Automatischer Neustart**: Beim Wechsel des Anzeigemodus wird die App nach Bestätigung neu gestartet, um die System-Konfiguration (z.B. Wake-Lock) korrekt anzuwenden.
 * **Sicherer Reset**: Vollständiges Zurücksetzen von Spielstand und Zeit nach Bestätigung einer
   Sicherheitsabfrage im Menü.
 * **Navigation**: Intuitive Steuerung über Buttons und die Wear OS typische Swipe-Geste zum
@@ -112,7 +114,10 @@ I am always happy to receive feedback and feature requests.
     * Short vibration for confirmation when adding a goal.
     * Long vibration for goal correction.
 * **Halftime function**: Accessible via the menu. Resets only the clock, the score remains for the second half.
-* **Always-On Display**: The display remains permanently active while using the app so that the time and score can be read at any time.
+* **Display Mode Configuration**: Choose between two modes in the settings:
+    * **Always-On Display**: The display remains permanently active while using the app.
+    * **Ongoing Activity**: The app can be swiped to the background. An icon on the watch face and an entry in the launcher ("Recents") allow quick return to the game. The current score is displayed there in monochrome.
+* **Automatic Restart**: When changing the display mode, the app restarts after confirmation to correctly apply system configurations (e.g., wake lock).
 * **Secure reset**: Complete reset of score and time after confirming a security prompt in the menu.
 * **Navigation**: Intuitive control via buttons and the typical Wear OS swipe gesture to return.
 * **Standalone App**: Works completely independently of the smartphone.

@@ -19,3 +19,4 @@ gradle-app.setting
 # Cache of project
 .gradletasknamecache
 /mobile/release
+/.kotlin/sessions/kotlin-compiler-10953752672267357663.salive

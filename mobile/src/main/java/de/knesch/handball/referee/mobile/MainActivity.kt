@@ -211,7 +211,7 @@ fun WatchStatusScreen() {
         )
 
         Image(
-            painter = painterResource(id = de.knesch.handball.referee.shared.R.drawable.tile_preview),
+            painter = painterResource(id = de.knesch.handball.referee.shared.R.drawable.app_preview),
             contentDescription = "Tile Preview",
             modifier = Modifier
                 .size(200.dp)

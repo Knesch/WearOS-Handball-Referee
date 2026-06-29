@@ -1,0 +1,10 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Fülligeres Sanduhr-Icon für bessere Sichtbarkeit -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M4,2 H20 V7 L14,12 L20,17 V22 H4 V17 L10,12 L4,7 Z" />
+</vector>

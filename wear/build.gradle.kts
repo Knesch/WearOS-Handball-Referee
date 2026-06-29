@@ -21,8 +21,8 @@ android {
         applicationId = "de.knesch.handball.referee"
         minSdk = 30
         targetSdk = 36
-        versionCode = 7
-        versionName = "1.3.0"
+        versionCode = 9
+        versionName = "1.4.0"
     }
 
     buildTypes {
@@ -39,6 +39,7 @@ android {
     }
     lint {
         checkReleaseBuilds = false
+        disable += "ActivityIconColor"
     }
     buildFeatures {
         compose = true
@@ -63,14 +64,17 @@ dependencies {
     implementation(libs.compose.ui.tooling)
     implementation(libs.ui.tooling)
     implementation(libs.core.splashscreen)
+    implementation(libs.wear.tiles)
     implementation(libs.protolayout)
     implementation(libs.protolayout.material3)
+    implementation(libs.guava)
     implementation(libs.ui)
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
     implementation(libs.watchface.complications.data.source.ktx)
     implementation(libs.lifecycle.viewmodel.compose)
     implementation(libs.compose.navigation)
+    implementation(libs.wear.ongoing)
     implementation(libs.play.services.wearable)
     implementation(libs.androidx.fragment.ktx)
     testImplementation(libs.junit)

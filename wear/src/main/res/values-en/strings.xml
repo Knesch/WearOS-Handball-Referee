@@ -11,4 +11,14 @@
     <string name="action_back">Back</string>
     <string name="to_the_game">To the game</string>
     <string name="start_config">Configuration</string>
+    <string name="display_mode">Display Mode</string>
+    <string name="display_mode_always_on">Always On</string>
+    <string name="display_mode_ongoing">Ongoing Activity</string>
+    <string name="restart_dialog_title">Restart app?</string>
+    <string name="restart_dialog_message">The mode has been changed. The app needs to be restarted to apply the changes.</string>
+    <string name="tile_label">Handball Score</string>
+    <string name="complication_label">Handball Score</string>
+    <string name="complication_time_label">Handball Match Time</string>
+    <string name="tile_status_running">Game running</string>
+    <string name="tile_status_paused">Game paused</string>
 </resources>

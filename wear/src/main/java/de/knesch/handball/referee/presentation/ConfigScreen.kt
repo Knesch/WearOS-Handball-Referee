@@ -5,10 +5,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,7 +14,6 @@ import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
-import androidx.wear.compose.material3.AlertDialog
 import androidx.wear.compose.material3.Button
 import androidx.wear.compose.material3.ButtonDefaults
 import androidx.wear.compose.material3.ListHeader
@@ -33,37 +28,11 @@ fun ConfigScreen(
     listState: ScalingLazyListState = rememberScalingLazyListState()
 ) {
     val context = LocalContext.current
-    var showRestartDialog by remember { mutableStateOf(false) }
 
     val colors = listOf(
         Color.White, Color.Black, Color.Red, Color.Blue,
         Color.Yellow, Color.Green, Color(0xFFFFA500), // Orange
         Color(0xFF800080) // Purple
-    )
-
-    AlertDialog(
-        visible = showRestartDialog,
-        onDismissRequest = { showRestartDialog = false },
-        confirmButton = {
-            Button(
-                onClick = {
-                    (context as? Activity)?.recreate()
-                    showRestartDialog = false
-                },
-                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
-            ) {
-                Text(stringResource(R.string.dialog_yes))
-            }
-        },
-        dismissButton = {
-            Button(
-                onClick = { showRestartDialog = false }
-            ) {
-                Text(stringResource(R.string.dialog_no))
-            }
-        },
-        title = { Text(stringResource(R.string.restart_dialog_title)) },
-        text = { Text(stringResource(R.string.restart_dialog_message)) }
     )
 
     ScalingLazyColumn(
@@ -105,7 +74,7 @@ fun ConfigScreen(
             Button(
                 onClick = {
                     viewModel.updateOngoingActivity(!viewModel.useOngoingActivity)
-                    showRestartDialog = true
+                    (context as? Activity)?.recreate()
                 },
                 modifier = Modifier
                     .fillMaxWidth()

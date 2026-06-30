@@ -54,8 +54,11 @@ class MainActivity : ComponentActivity() {
             Log.e("HandballReferee", "FEHLER: Capabilities konnten nicht geladen werden!", e)
         }
 
+        val startTarget = intent.getStringExtra("target")
+        Log.i("HandballReferee", "MainActivity started with target: $startTarget")
+
         setContent {
-            HandballSchiedsrichterApp()
+            HandballSchiedsrichterApp(startTarget)
         }
 
         if (!useOngoingActivity) {
@@ -67,14 +70,17 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun HandballSchiedsrichterApp() {
+fun HandballSchiedsrichterApp(startTarget: String?) {
     val navController = rememberSwipeDismissableNavController()
     val viewModel: MatchViewModel = viewModel()
+    
+    val initialRoute = if (startTarget == "match") "match" else "start"
+    
     HandballSchiedsrichterTheme {
         AppScaffold {
             SwipeDismissableNavHost(
                 navController = navController,
-                startDestination = "start"
+                startDestination = initialRoute
             ) {
                 composable("start") {
                     StartScreen(
@@ -100,5 +106,5 @@ fun HandballSchiedsrichterApp() {
 @WearPreviewFontScales
 @Composable
 fun DefaultPreview() {
-    HandballSchiedsrichterApp()
+    HandballSchiedsrichterApp(null)
 }

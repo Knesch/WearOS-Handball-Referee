@@ -16,4 +16,9 @@
     <string name="display_mode_ongoing">Ongoing Activity</string>
     <string name="restart_dialog_title">App neu starten?</string>
     <string name="restart_dialog_message">Der Modus wurde geändert. Die App muss neu gestartet werden, um die Änderungen zu übernehmen.</string>
+    <string name="tile_label">Handball-Spielstand</string>
+    <string name="complication_label">Handball-Spielstand</string>
+    <string name="complication_time_label">Handball-Spielzeit</string>
+    <string name="tile_status_running">Spiel läuft</string>
+    <string name="tile_status_paused">Spiel pausiert</string>
 </resources>

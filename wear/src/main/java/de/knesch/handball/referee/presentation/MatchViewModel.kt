@@ -1,6 +1,7 @@
 package de.knesch.handball.referee.presentation
 
 import android.app.Application
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -10,12 +11,16 @@ import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
+import androidx.core.content.edit
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.core.content.edit
-import de.knesch.handball.referee.service.HandballMatch
+import androidx.wear.tiles.TileService
+import androidx.wear.watchface.complications.datasource.ComplicationDataSourceUpdateRequester
+import de.knesch.handball.referee.service.MainComplicationService
+import de.knesch.handball.referee.service.MainTileService
 import de.knesch.handball.referee.service.MatchRepository
 import de.knesch.handball.referee.service.MatchService
+import de.knesch.handball.referee.service.TimeComplicationService
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
@@ -69,6 +74,20 @@ class MatchViewModel(application: Application) : AndroidViewModel(application) {
             }
             getApplication<Application>().startForegroundService(intent)
         }
+        updateTileAndComplication()
+    }
+
+    private fun updateTileAndComplication() {
+        TileService.getUpdater(getApplication())
+            .requestUpdate(MainTileService::class.java)
+
+        val componentName = ComponentName(getApplication(), MainComplicationService::class.java)
+        ComplicationDataSourceUpdateRequester.create(getApplication(), componentName)
+            .requestUpdateAll()
+
+        val timeComponentName = ComponentName(getApplication(), TimeComplicationService::class.java)
+        ComplicationDataSourceUpdateRequester.create(getApplication(), timeComponentName)
+            .requestUpdateAll()
     }
 
     init {
@@ -117,6 +136,7 @@ class MatchViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
         elapsedMillis = spiel.stopWatch.getTimeElapsed()
+        updateTileAndComplication()
     }
 
     fun reset() {
@@ -128,6 +148,7 @@ class MatchViewModel(application: Application) : AndroidViewModel(application) {
         if (useOngoingActivity) {
             stopMatchService()
         }
+        updateTileAndComplication()
     }
 
     fun halftime() {
@@ -137,5 +158,6 @@ class MatchViewModel(application: Application) : AndroidViewModel(application) {
         if (useOngoingActivity) {
             stopMatchService()
         }
+        updateTileAndComplication()
     }
 }

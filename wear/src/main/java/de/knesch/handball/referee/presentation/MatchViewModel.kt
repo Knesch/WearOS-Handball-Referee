@@ -1,6 +1,7 @@
 package de.knesch.handball.referee.presentation
 
 import android.app.Application
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -10,17 +11,16 @@ import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
+import androidx.core.content.edit
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.core.content.edit
-import de.knesch.handball.referee.service.MatchRepository
-import de.knesch.handball.referee.service.MatchService
-import de.knesch.handball.referee.service.MainTileService
-import de.knesch.handball.referee.service.MainComplicationService
-import de.knesch.handball.referee.service.TimeComplicationService
 import androidx.wear.tiles.TileService
 import androidx.wear.watchface.complications.datasource.ComplicationDataSourceUpdateRequester
-import android.content.ComponentName
+import de.knesch.handball.referee.service.MainComplicationService
+import de.knesch.handball.referee.service.MainTileService
+import de.knesch.handball.referee.service.MatchRepository
+import de.knesch.handball.referee.service.MatchService
+import de.knesch.handball.referee.service.TimeComplicationService
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch

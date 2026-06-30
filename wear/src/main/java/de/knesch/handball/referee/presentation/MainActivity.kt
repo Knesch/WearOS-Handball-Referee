@@ -13,6 +13,9 @@ import androidx.compose.runtime.Composable
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material3.AppScaffold
+import androidx.wear.compose.material3.ScreenScaffold
+import androidx.wear.compose.material3.TimeText
+import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
 import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
@@ -83,19 +86,42 @@ fun HandballSchiedsrichterApp(startTarget: String?) {
                 startDestination = initialRoute
             ) {
                 composable("start") {
-                    StartScreen(
-                        onNewGameClick = { navController.navigate("match") },
-                        onConfigClick = { navController.navigate("config") }
-                    )
+                    val listState = rememberScalingLazyListState()
+                    ScreenScaffold(
+                        scrollState = listState,
+                        timeText = { TimeText() }
+                    ) {
+                        StartScreen(
+                            onNewGameClick = { navController.navigate("match") },
+                            onConfigClick = { navController.navigate("config") },
+                            listState = listState
+                        )
+                    }
                 }
                 composable("match") {
-                    MatchScreen(viewModel = viewModel)
+                    val listState = rememberScalingLazyListState()
+                    ScreenScaffold(
+                        scrollState = listState,
+                        timeText = { TimeText() }
+                    ) {
+                        MatchScreen(
+                            viewModel = viewModel,
+                            listState = listState
+                        )
+                    }
                 }
                 composable("config") {
-                    ConfigScreen(
-                        viewModel = viewModel,
-                        onBackClick = { navController.popBackStack() }
-                    )
+                    val listState = rememberScalingLazyListState()
+                    ScreenScaffold(
+                        scrollState = listState,
+                        timeText = { TimeText() }
+                    ) {
+                        ConfigScreen(
+                            viewModel = viewModel,
+                            onBackClick = { navController.popBackStack() },
+                            listState = listState
+                        )
+                    }
                 }
             }
         }

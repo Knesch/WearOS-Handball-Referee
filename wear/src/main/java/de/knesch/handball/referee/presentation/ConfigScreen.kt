@@ -1,14 +1,10 @@
 package de.knesch.handball.referee.presentation
 
-import android.content.Intent
+import android.app.Activity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -16,57 +12,27 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
+import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
-import androidx.wear.compose.material3.AlertDialog
 import androidx.wear.compose.material3.Button
 import androidx.wear.compose.material3.ButtonDefaults
 import androidx.wear.compose.material3.ListHeader
 import androidx.wear.compose.material3.MaterialTheme
 import androidx.wear.compose.material3.Text
 import de.knesch.handball.referee.R
-import kotlin.system.exitProcess
 
 @Composable
 fun ConfigScreen(
     viewModel: MatchViewModel,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    listState: ScalingLazyListState = rememberScalingLazyListState()
 ) {
-    val listState = rememberScalingLazyListState()
     val context = LocalContext.current
-    var showRestartDialog by remember { mutableStateOf(false) }
 
     val colors = listOf(
         Color.White, Color.Black, Color.Red, Color.Blue,
         Color.Yellow, Color.Green, Color(0xFFFFA500), // Orange
         Color(0xFF800080) // Purple
-    )
-
-    AlertDialog(
-        visible = showRestartDialog,
-        onDismissRequest = { showRestartDialog = false },
-        confirmButton = {
-            Button(
-                onClick = {
-                    val intent = context.packageManager.getLaunchIntentForPackage(context.packageName)
-                    intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                    intent?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    context.startActivity(intent)
-                    exitProcess(0)
-                },
-                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
-            ) {
-                Text(stringResource(R.string.dialog_yes))
-            }
-        },
-        dismissButton = {
-            Button(
-                onClick = { showRestartDialog = false }
-            ) {
-                Text(stringResource(R.string.dialog_no))
-            }
-        },
-        title = { Text(stringResource(R.string.restart_dialog_title)) },
-        text = { Text(stringResource(R.string.restart_dialog_message)) }
     )
 
     ScalingLazyColumn(
@@ -108,7 +74,7 @@ fun ConfigScreen(
             Button(
                 onClick = {
                     viewModel.updateOngoingActivity(!viewModel.useOngoingActivity)
-                    showRestartDialog = true
+                    (context as? Activity)?.recreate()
                 },
                 modifier = Modifier
                     .fillMaxWidth()

@@ -5,10 +5,8 @@ import android.os.Vibrator
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -26,8 +24,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
+import androidx.wear.compose.foundation.lazy.ScalingLazyListState
+import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
 import androidx.wear.compose.material3.AlertDialog
 import androidx.wear.compose.material3.Button
 import androidx.wear.compose.material3.ButtonDefaults
@@ -40,7 +40,10 @@ import de.knesch.handball.referee.presentation.theme.GreenRunning
 import de.knesch.handball.referee.presentation.theme.RedStop
 
 @Composable
-fun MatchScreen(viewModel: MatchViewModel = viewModel()) {
+fun MatchScreen(
+    viewModel: MatchViewModel = viewModel(),
+    listState: ScalingLazyListState = rememberScalingLazyListState()
+) {
 
     var showResetDialog by remember { mutableStateOf(false) }
     var showMenu by remember { mutableStateOf(false) }
@@ -84,7 +87,7 @@ fun MatchScreen(viewModel: MatchViewModel = viewModel()) {
                 },
                 modifier = Modifier.fillMaxWidth(),
             ) {
-                Text(stringResource(R.string.action_back), fontSize = 14.sp)
+                Text(stringResource(R.string.action_back))
             }
         }
         item {
@@ -96,7 +99,7 @@ fun MatchScreen(viewModel: MatchViewModel = viewModel()) {
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(containerColor = AmberHalftime)
             ) {
-                Text(stringResource(R.string.action_halftime), fontSize = 14.sp)
+                Text(stringResource(R.string.action_halftime))
             }
         }
         item {
@@ -111,7 +114,7 @@ fun MatchScreen(viewModel: MatchViewModel = viewModel()) {
                     contentColor = Color.White
                 )
             ) {
-                Text(stringResource(R.string.action_reset), fontSize = 14.sp)
+                Text(stringResource(R.string.action_reset))
             }
         }
     }
@@ -127,50 +130,40 @@ fun MatchScreen(viewModel: MatchViewModel = viewModel()) {
         vibrator?.vibrate(VibrationEffect.createOneShot(300, VibrationEffect.DEFAULT_AMPLITUDE))
     }
 
-    Box(
+    ScalingLazyColumn(
         modifier = (if (viewModel.useOngoingActivity) Modifier else Modifier.keepScreenOn())
             .fillMaxSize(),
-        contentAlignment = Alignment.Center
+        state = listState,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Row(
+        // Stopwatch Display
+        item {
+            val minutes = (viewModel.elapsedMillis / 1000) / 60
+            val seconds = (viewModel.elapsedMillis / 1000) % 60
+            Text(
+                text = "%02d:%02d".format(minutes, seconds),
+                style = MaterialTheme.typography.displayMedium,
+                color = if (viewModel.isRunning) GreenRunning else Color.White,
                 modifier = Modifier
-                    .weight(1.5f)
-                    .padding(top = 10.dp)
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.Bottom
-            ) {
-                // Stopwatch Display
-                val minutes = (viewModel.elapsedMillis / 1000) / 60
-                val seconds = (viewModel.elapsedMillis / 1000) % 60
-                Text(
-                    text = "%02d:%02d".format(minutes, seconds),
-                    style = MaterialTheme.typography.displayLarge,
-                    color = if (viewModel.isRunning) GreenRunning else Color.White,
-                    modifier = Modifier.pointerInput(Unit) {
+                    .padding(top = 12.dp)
+                    .pointerInput(Unit) {
                         detectTapGestures(
                             onTap = { viewModel.toggleStopWatch() }
                         )
                     }
-                )
-            }
+            )
+        }
 
-            // Score Display
+        // Score Display
+        item {
             Row(
-                modifier = Modifier
-                    .weight(2f)
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 ScoreColumn(
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxHeight(),
+                    modifier = Modifier.weight(1f),
                     label = stringResource(R.string.team_home),
                     score = viewModel.toreHeim,
                     color = viewModel.colorHeim,
@@ -186,14 +179,13 @@ fun MatchScreen(viewModel: MatchViewModel = viewModel()) {
 
                 Text(
                     text = ":",
-                    style = MaterialTheme.typography.displaySmall,
-                    fontWeight = FontWeight.Bold
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(horizontal = 4.dp)
                 )
 
                 ScoreColumn(
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxHeight(),
+                    modifier = Modifier.weight(1f),
                     label = stringResource(R.string.team_guest),
                     score = viewModel.toreGast,
                     color = viewModel.colorGast,
@@ -207,23 +199,15 @@ fun MatchScreen(viewModel: MatchViewModel = viewModel()) {
                     }
                 )
             }
+        }
 
-            // Controls
-            Row(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(bottom = 10.dp, top = 6.dp)
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.Bottom
-            )
-            {
-                Button(
-                    onClick = { showMenu = true },
-                    //modifier = Modifier.padding(bottom = 8.dp)
-                ) {
-                    Text(stringResource(R.string.menu_title), fontSize = 10.sp)
-                }
+        // Controls
+        item {
+            Button(
+                onClick = { showMenu = true },
+                modifier = Modifier.padding(top = 8.dp)
+            ) {
+                Text(stringResource(R.string.menu_title))
             }
         }
     }
@@ -245,6 +229,7 @@ fun ScoreColumn(
         verticalArrangement = Arrangement.Center,
         modifier = modifier
             .background(color)
+            .padding(vertical = 8.dp)
             .pointerInput(Unit) {
                 detectTapGestures(
                     onTap = { onAdd() },
@@ -254,14 +239,13 @@ fun ScoreColumn(
     ) {
         Text(
             text = label,
-            style = MaterialTheme.typography.labelMedium,
+            style = MaterialTheme.typography.labelSmall,
             color = contentColor.copy(alpha = 0.8f)
         )
         Text(
             text = score.toString(),
-            style = MaterialTheme.typography.displayLarge,
+            style = MaterialTheme.typography.displayMedium,
             fontWeight = FontWeight.Bold,
-            fontSize = 50.sp,
             color = contentColor
         )
     }

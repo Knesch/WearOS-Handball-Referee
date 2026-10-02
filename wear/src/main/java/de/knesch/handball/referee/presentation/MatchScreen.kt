@@ -51,12 +51,12 @@ import de.knesch.handball.referee.presentation.theme.RedStop
 @Composable
 fun MatchScreen(
     viewModel: MatchViewModel = viewModel(),
-    listState: ScalingLazyListState = rememberScalingLazyListState()
+    listState: ScalingLazyListState = rememberScalingLazyListState(),
 ) {
 
-    var showResetDialog by remember { mutableStateOf(false) }
-    var showTimeAdjustDialog by remember { mutableStateOf(false) }
-    var showMenu by remember { mutableStateOf(false) }
+    var showResetDialog by remember { mutableStateOf(value = false) }
+    var showTimeAdjustDialog by remember { mutableStateOf(value = false) }
+    var showMenu by remember { mutableStateOf(value = false) }
 
     // Reset Confirmation Dialog
     AlertDialog(
@@ -262,7 +262,7 @@ fun TimeAdjustDialog(
     )
 
     Dialog(
-        visible = visible,
+        visible = true,
         onDismissRequest = onDismissRequest
     ) {
         Column(
@@ -347,7 +347,7 @@ fun TimeAdjustDialog(
 
                 Button(
                     onClick = {
-                        val newMillis = (minuteState.selectedOptionIndex * 60L + secondState.selectedOptionIndex * 1L) * 1000L
+                        val newMillis = ((minuteState.selectedOptionIndex * 60L) + secondState.selectedOptionIndex) * 1000L
                         onConfirm(newMillis)
                     },
                     colors = ButtonDefaults.buttonColors(
@@ -372,7 +372,7 @@ fun ScoreColumn(
     score: Int,
     color: Color,
     onAdd: () -> Unit,
-    onRemove: () -> Unit
+    onRemove: () -> Unit,
 ) {
     val contentColor = if (isDark(color)) Color.White else Color.Black
 
@@ -385,7 +385,7 @@ fun ScoreColumn(
             .pointerInput(Unit) {
                 detectTapGestures(
                     onTap = { onAdd() },
-                    onLongPress = { onRemove() }
+                    onLongPress = { onRemove() },
                 )
             }
     ) {

@@ -12,7 +12,7 @@ class StopWatchTest {
 
     @Before
     fun setUp() {
-        stopWatch = StopWatch(timeProvider = { currentTime })
+        stopWatch = StopWatch { currentTime }
     }
 
     @Test

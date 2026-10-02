@@ -22,7 +22,7 @@ import de.knesch.handball.referee.R
 fun StartScreen(
     onNewGameClick: () -> Unit,
     onConfigClick: () -> Unit,
-    listState: ScalingLazyListState = rememberScalingLazyListState()
+    listState: ScalingLazyListState = rememberScalingLazyListState(),
 ) {
     ScalingLazyColumn(
         modifier = Modifier.fillMaxSize(),

@@ -21,4 +21,5 @@
     <string name="complication_time_label">Handball Match Time</string>
     <string name="tile_status_running">Game running</string>
     <string name="tile_status_paused">Game paused</string>
+    <string name="dialog_adjust_time_title">Adjust time</string>
 </resources>

@@ -25,6 +25,7 @@ klassische Notizkarte oder das Tape auf dem Uhrarmband verwendet werden.
   hinterlegt, mit automatischer Kontrastanpassung der Schrift (Schwarz/Weiß).
 * **Präzise Zeitnahme**: Starten und Stoppen der Spielzeit durch einfaches Tippen auf die
   Zeitanzeige.
+* **Zeit-Korrektur**: Bei gestoppter Stoppuhr öffnet langes Drücken auf die Zeitanzeige einen Korrektur-Dialog mit scrollbarer Ziffernauswahl (Pickers) für Minuten (0–30) und Sekunden (0–59).
 * **Tor-Erfassung**:
     * Tippen auf die linke (Heim) oder rechte (Gast) Bildschirmhälfte fügt ein Tor hinzu.
     * Langes Drücken auf den jeweiligen Torbereich korrigiert den Spielstand (Tor abziehen).
@@ -36,7 +37,6 @@ klassische Notizkarte oder das Tape auf dem Uhrarmband verwendet werden.
 * **Anzeigemodus-Konfiguration**: In den Einstellungen kann zwischen zwei Modi gewählt werden:
     * **Always-On Display**: Das Display bleibt während der Nutzung der App dauerhaft aktiv.
     * **Ongoing Activity**: Die App kann in den Hintergrund gewischt werden. Ein Icon auf dem Zifferblatt sowie ein Eintrag im Launcher ("Recents") erlauben den schnellen Rücksprung zum Spiel. Der aktuelle Spielstand wird dort monochrom angezeigt.
-* **Automatischer Neustart**: Beim Wechsel des Anzeigemodus wird die App nach Bestätigung neu gestartet, um die System-Konfiguration (z.B. Wake-Lock) korrekt anzuwenden.
 * **Sicherer Reset**: Vollständiges Zurücksetzen von Spielstand und Zeit nach Bestätigung einer
   Sicherheitsabfrage im Menü.
 * **Navigation**: Intuitive Steuerung über Buttons und die Wear OS typische Swipe-Geste zum
@@ -58,6 +58,7 @@ klassische Notizkarte oder das Tape auf dem Uhrarmband verwendet werden.
 | Aktion                            | Ergebnis                                 |
 |:----------------------------------|:-----------------------------------------|
 | **Tippen auf Zeit**               | Start / Stopp der Uhr                    |
+| **Langes Drücken auf Zeit (gestoppt)** | Korrektur-Dialog öffnen (Minuten & Sekunden) |
 | **Tippen auf Tor-Hälfte**         | Tor hinzufügen (+1)                      |
 | **Langes Drücken auf Tor-Hälfte** | Tor abziehen (-1)                        |
 | **Menü -> Halbzeit**              | Uhr auf 00:00 setzen (Spielstand bleibt) |
@@ -107,6 +108,7 @@ I am always happy to receive feedback and feature requests.
 * **Jersey color customization**: In the settings, the jersey colors for the home and guest teams can be selected individually (White, Black, Red, Blue, Yellow, Green, Orange, Purple).
 * **Visual orientation**: The goal areas in the game screen are highlighted in the respective jersey color, with automatic contrast adjustment of the font (Black/White).
 * **Precise timing**: Start and stop the game time by simply tapping on the time display.
+* **Time Correction**: When the stopwatch is stopped, long pressing the time display opens a correction dialog with scrollable digit pickers for minutes (0–30) and seconds (0–59).
 * **Goal tracking**:
     * Tapping on the left (Home) or right (Guest) half of the screen adds a goal.
     * Long pressing on the respective goal area corrects the score (subtract goal).
@@ -117,7 +119,6 @@ I am always happy to receive feedback and feature requests.
 * **Display Mode Configuration**: Choose between two modes in the settings:
     * **Always-On Display**: The display remains permanently active while using the app.
     * **Ongoing Activity**: The app can be swiped to the background. An icon on the watch face and an entry in the launcher ("Recents") allow quick return to the game. The current score is displayed there in monochrome.
-* **Automatic Restart**: When changing the display mode, the app restarts after confirmation to correctly apply system configurations (e.g., wake lock).
 * **Secure reset**: Complete reset of score and time after confirming a security prompt in the menu.
 * **Navigation**: Intuitive control via buttons and the typical Wear OS swipe gesture to return.
 * **Standalone App**: Works completely independently of the smartphone.
@@ -136,6 +137,7 @@ I am always happy to receive feedback and feature requests.
 | Action                            | Result                                 |
 |:----------------------------------|:-----------------------------------------|
 | **Tap on time**               | Start / Stop the clock                    |
+| **Long press on time (when stopped)** | Open time correction dialog (minutes & seconds) |
 | **Tap on goal half**         | Add goal (+1)                      |
 | **Long press on goal half** | Subtract goal (-1)                        |
 | **Menu -> Halftime**              | Set clock to 00:00 (score remains) |

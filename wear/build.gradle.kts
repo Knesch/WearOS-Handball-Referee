@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.activity.compose)
     implementation(libs.compose.foundation)
     implementation(libs.compose.material3)
+    implementation(libs.material.icons.core)
     implementation(libs.compose.ui.tooling)
     implementation(libs.ui.tooling)
     implementation(libs.core.splashscreen)

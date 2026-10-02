@@ -27,6 +27,13 @@ class StopWatch(private val timeProvider: () -> Long = { System.currentTimeMilli
         currentStartTime = 0L
     }
 
+    fun setElapsedMillis(millis: Long) {
+        previousTimeElapsed = millis.coerceAtLeast(0L)
+        if (isRunning) {
+            currentStartTime = timeProvider()
+        }
+    }
+
     fun getTimeElapsed(): Long {
         if (isRunning) {
             return previousTimeElapsed + (timeProvider() - currentStartTime)

@@ -91,4 +91,19 @@ class StopWatchTest {
 
         assertEquals(elapsedAfterFirstStop, stopWatch.getTimeElapsed())
     }
+
+    @Test
+    fun setElapsedMillis_updates_elapsed_time_when_stopped() {
+        stopWatch.setElapsedMillis(120000L) // 2 minutes
+        assertEquals(120000L, stopWatch.getTimeElapsed())
+    }
+
+    @Test
+    fun setElapsedMillis_updates_elapsed_time_when_running() {
+        stopWatch.start()
+        currentTime += 500
+        stopWatch.setElapsedMillis(300000L) // 5 minutes
+        currentTime += 1000
+        assertEquals(301000L, stopWatch.getTimeElapsed())
+    }
 }

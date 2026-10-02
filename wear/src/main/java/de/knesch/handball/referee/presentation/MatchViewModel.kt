@@ -160,4 +160,10 @@ class MatchViewModel(application: Application) : AndroidViewModel(application) {
         }
         updateTileAndComplication()
     }
+
+    fun updateElapsedMillis(newMillis: Long) {
+        spiel.stopWatch.setElapsedMillis(newMillis)
+        elapsedMillis = spiel.stopWatch.getTimeElapsed()
+        updateMatchService()
+    }
 }

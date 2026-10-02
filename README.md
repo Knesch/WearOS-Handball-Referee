@@ -30,7 +30,7 @@ klassische Notizkarte oder das Tape auf dem Uhrarmband verwendet werden.
     * Tippen auf die linke (Heim) oder rechte (Gast) Bildschirmhälfte fügt ein Tor hinzu.
     * Langes Drücken auf den jeweiligen Torbereich korrigiert den Spielstand (Tor abziehen).
 * **Haptisches Feedback**:
-    * Kurze Vibration zur Bestätigung bei Tor-Addition.
+    * Kurze Vibration zur Bestätigung bei Tor-Addition sowie beim Starten und Stoppen der Zeit.
     * Lange Vibration bei Tor-Korrektur.
 * **Halbzeit-Funktion**: Über das Menü erreichbar. Setzt nur die Uhr zurück, der Spielstand bleibt
   für die zweite Halbzeit erhalten.
@@ -113,7 +113,7 @@ I am always happy to receive feedback and feature requests.
     * Tapping on the left (Home) or right (Guest) half of the screen adds a goal.
     * Long pressing on the respective goal area corrects the score (subtract goal).
 * **Haptic feedback**:
-    * Short vibration for confirmation when adding a goal.
+    * Short vibration for confirmation when adding a goal and when starting or stopping the time.
     * Long vibration for goal correction.
 * **Halftime function**: Accessible via the menu. Resets only the clock, the score remains for the second half.
 * **Display Mode Configuration**: Choose between two modes in the settings:

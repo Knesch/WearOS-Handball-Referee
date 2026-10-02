@@ -170,13 +170,16 @@ fun MatchScreen(
                     .padding(top = 12.dp)
                     .pointerInput(Unit) {
                         detectTapGestures(
-                            onTap = { viewModel.toggleStopWatch() },
+                            onTap = {
+                                viewModel.toggleStopWatch()
+                                vibrateShort()
+                            },
                             onLongPress = {
                                 if (!viewModel.isRunning) {
                                     vibrateShort()
                                     showTimeAdjustDialog = true
                                 }
-                            }
+                            },
                         )
                     }
             )

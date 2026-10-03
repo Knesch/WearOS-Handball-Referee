@@ -15,14 +15,14 @@ if (localPropertiesFile.exists()) {
 
 android {
     namespace = "de.knesch.handball.referee"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "de.knesch.handball.referee"
         minSdk = 30
-        targetSdk = 36
-        versionCode = 10
-        versionName = "1.5.0"
+        targetSdk = 37
+        versionCode = 11
+        versionName = "1.6.0"
     }
 
     buildTypes {
@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.activity.compose)
     implementation(libs.compose.foundation)
     implementation(libs.compose.material3)
+    implementation(libs.material.icons.core)
     implementation(libs.compose.ui.tooling)
     implementation(libs.ui.tooling)
     implementation(libs.core.splashscreen)
@@ -75,6 +76,7 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.compose)
     implementation(libs.compose.navigation)
     implementation(libs.wear.ongoing)
+    implementation(libs.wear.input)
     implementation(libs.play.services.wearable)
     implementation(libs.androidx.fragment.ktx)
     testImplementation(libs.junit)

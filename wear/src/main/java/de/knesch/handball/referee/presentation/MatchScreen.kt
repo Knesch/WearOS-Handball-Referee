@@ -7,9 +7,14 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -31,8 +36,12 @@ import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
 import androidx.wear.compose.material3.AlertDialog
 import androidx.wear.compose.material3.Button
 import androidx.wear.compose.material3.ButtonDefaults
+import androidx.wear.compose.material3.Dialog
+import androidx.wear.compose.material3.Icon
 import androidx.wear.compose.material3.MaterialTheme
+import androidx.wear.compose.material3.Picker
 import androidx.wear.compose.material3.Text
+import androidx.wear.compose.material3.rememberPickerState
 import androidx.wear.compose.ui.tooling.preview.WearPreviewDevices
 import de.knesch.handball.referee.R
 import de.knesch.handball.referee.presentation.theme.AmberHalftime
@@ -42,11 +51,13 @@ import de.knesch.handball.referee.presentation.theme.RedStop
 @Composable
 fun MatchScreen(
     viewModel: MatchViewModel = viewModel(),
-    listState: ScalingLazyListState = rememberScalingLazyListState()
+    listState: ScalingLazyListState = rememberScalingLazyListState(),
 ) {
+    val context = LocalContext.current
 
-    var showResetDialog by remember { mutableStateOf(false) }
-    var showMenu by remember { mutableStateOf(false) }
+    var showResetDialog by remember { mutableStateOf(value = false) }
+    var showTimeAdjustDialog by remember { mutableStateOf(value = false) }
+    var showMenu by remember { mutableStateOf(value = false) }
 
     // Reset Confirmation Dialog
     AlertDialog(
@@ -72,6 +83,17 @@ fun MatchScreen(
         },
         title = { Text(stringResource(R.string.dialog_reset_title)) },
         text = { Text(stringResource(R.string.dialog_reset_message)) }
+    )
+
+    // Time Adjustment Dialog
+    TimeAdjustDialog(
+        visible = showTimeAdjustDialog,
+        onDismissRequest = { showTimeAdjustDialog = false },
+        initialElapsedMillis = viewModel.elapsedMillis,
+        onConfirm = { newMillis ->
+            viewModel.updateElapsedMillis(newMillis)
+            showTimeAdjustDialog = false
+        }
     )
 
     // Menu Dialog
@@ -119,7 +141,6 @@ fun MatchScreen(
         }
     }
 
-    val context = LocalContext.current
     val vibrator = remember { context.getSystemService(Vibrator::class.java) }
 
     fun vibrateShort() {
@@ -149,7 +170,16 @@ fun MatchScreen(
                     .padding(top = 12.dp)
                     .pointerInput(Unit) {
                         detectTapGestures(
-                            onTap = { viewModel.toggleStopWatch() }
+                            onTap = {
+                                viewModel.toggleStopWatch()
+                                vibrateShort()
+                            },
+                            onLongPress = {
+                                if (!viewModel.isRunning) {
+                                    vibrateShort()
+                                    showTimeAdjustDialog = true
+                                }
+                            },
                         )
                     }
             )
@@ -214,13 +244,138 @@ fun MatchScreen(
 }
 
 @Composable
+fun TimeAdjustDialog(
+    visible: Boolean,
+    onDismissRequest: () -> Unit,
+    initialElapsedMillis: Long,
+    onConfirm: (Long) -> Unit
+) {
+    if (!visible) return
+
+    val initialMinutes = ((initialElapsedMillis / 1000) / 60).toInt().coerceIn(0, 30)
+    val initialSeconds = ((initialElapsedMillis / 1000) % 60).toInt().coerceIn(0, 59)
+
+    val minuteState = rememberPickerState(
+        initialNumberOfOptions = 31,
+        initiallySelectedIndex = initialMinutes
+    )
+    val secondState = rememberPickerState(
+        initialNumberOfOptions = 60,
+        initiallySelectedIndex = initialSeconds
+    )
+
+    Dialog(
+        visible = true,
+        onDismissRequest = onDismissRequest
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
+                .padding(vertical = 12.dp, horizontal = 8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = stringResource(R.string.dialog_adjust_time_title),
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.padding(top = 4.dp)
+            )
+
+            Row(
+                modifier = Modifier.weight(1f),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Picker(
+                    state = minuteState,
+                    contentDescription = { "Minutes" },
+                    modifier = Modifier
+                        .width(52.dp)
+                        .fillMaxHeight()
+                ) { optionIndex ->
+                    val isSelected = optionIndex == selectedOptionIndex
+                    Text(
+                        text = "%02d".format(optionIndex),
+                        style = MaterialTheme.typography.displaySmall,
+                        color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
+                    )
+                }
+
+                Text(
+                    text = ":",
+                    style = MaterialTheme.typography.displaySmall,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.padding(horizontal = 2.dp)
+                )
+
+                Picker(
+                    state = secondState,
+                    contentDescription = { "Seconds" },
+                    modifier = Modifier
+                        .width(52.dp)
+                        .fillMaxHeight()
+                ) { optionIndex ->
+                    val isSelected = optionIndex == selectedOptionIndex
+                    Text(
+                        text = "%02d".format(optionIndex),
+                        style = MaterialTheme.typography.displaySmall,
+                        color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
+                    )
+                }
+            }
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 4.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Button(
+                    onClick = onDismissRequest,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = RedStop,
+                        contentColor = Color.White
+                    )
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Close,
+                        contentDescription = stringResource(R.string.dialog_no)
+                    )
+                }
+
+                Button(
+                    onClick = {
+                        val newMillis = ((minuteState.selectedOptionIndex * 60L) + secondState.selectedOptionIndex) * 1000L
+                        onConfirm(newMillis)
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = GreenRunning,
+                        contentColor = Color.White
+                    )
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Check,
+                        contentDescription = stringResource(R.string.dialog_yes)
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
 fun ScoreColumn(
     modifier: Modifier = Modifier,
     label: String,
     score: Int,
     color: Color,
     onAdd: () -> Unit,
-    onRemove: () -> Unit
+    onRemove: () -> Unit,
 ) {
     val contentColor = if (isDark(color)) Color.White else Color.Black
 
@@ -233,7 +388,7 @@ fun ScoreColumn(
             .pointerInput(Unit) {
                 detectTapGestures(
                     onTap = { onAdd() },
-                    onLongPress = { onRemove() }
+                    onLongPress = { onRemove() },
                 )
             }
     ) {

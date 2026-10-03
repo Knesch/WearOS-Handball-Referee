@@ -58,6 +58,7 @@ klassische Notizkarte oder das Tape auf dem Uhrarmband verwendet werden.
 | Aktion                            | Ergebnis                                 |
 |:----------------------------------|:-----------------------------------------|
 | **Tippen auf Zeit**               | Start / Stopp der Uhr                    |
+| **Lautstärke-Tasten (Lauter/Leiser)** | Start / Stopp der Uhr                |
 | **Langes Drücken auf Zeit (gestoppt)** | Korrektur-Dialog öffnen (Minuten & Sekunden) |
 | **Tippen auf Tor-Hälfte**         | Tor hinzufügen (+1)                      |
 | **Langes Drücken auf Tor-Hälfte** | Tor abziehen (-1)                        |
@@ -137,6 +138,7 @@ I am always happy to receive feedback and feature requests.
 | Action                            | Result                                 |
 |:----------------------------------|:-----------------------------------------|
 | **Tap on time**               | Start / Stop the clock                    |
+| **Volume Buttons (Up/Down)**  | Start / Stop the clock                    |
 | **Long press on time (when stopped)** | Open time correction dialog (minutes & seconds) |
 | **Tap on goal half**         | Add goal (+1)                      |
 | **Long press on goal half** | Subtract goal (-1)                        |

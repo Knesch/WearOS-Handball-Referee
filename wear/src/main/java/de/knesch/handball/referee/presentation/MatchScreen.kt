@@ -53,6 +53,7 @@ fun MatchScreen(
     viewModel: MatchViewModel = viewModel(),
     listState: ScalingLazyListState = rememberScalingLazyListState(),
 ) {
+    val context = LocalContext.current
 
     var showResetDialog by remember { mutableStateOf(value = false) }
     var showTimeAdjustDialog by remember { mutableStateOf(value = false) }
@@ -140,7 +141,6 @@ fun MatchScreen(
         }
     }
 
-    val context = LocalContext.current
     val vibrator = remember { context.getSystemService(Vibrator::class.java) }
 
     fun vibrateShort() {

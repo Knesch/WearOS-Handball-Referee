@@ -40,8 +40,12 @@ class MatchService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Log.i(TAG, "MatchService onStartCommand, isStarted=$isStarted, action=${intent?.action}")
-        
+
         if (intent?.action == "STOP") {
+            if (!isStarted) {
+                val notification = createNotification()
+                startForeground(NOTIFICATION_ID, notification)
+            }
             stopService()
             return START_NOT_STICKY
         }
@@ -69,8 +73,10 @@ class MatchService : Service() {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
         }
         val pendingIntent = PendingIntent.getActivity(
-            this, 0, intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            this,
+            0,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
         )
 
         val scoreText = "${spiel.goalsHomeTeam}:${spiel.goalsGuestTeam}"
@@ -96,7 +102,9 @@ class MatchService : Service() {
             .build()
 
         val ongoingActivity = OngoingActivity.Builder(
-            applicationContext, NOTIFICATION_ID, notificationBuilder
+            applicationContext,
+            NOTIFICATION_ID,
+            notificationBuilder,
         )
             .setStaticIcon(R.drawable.ic_ongoing_activity)
             .setTouchIntent(pendingIntent)

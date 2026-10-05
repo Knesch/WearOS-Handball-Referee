@@ -6,7 +6,6 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
-import android.os.Binder
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
@@ -17,7 +16,6 @@ import de.knesch.handball.referee.presentation.MainActivity
 
 class MatchService : Service() {
 
-    private val binder = LocalBinder()
     private var isStarted = false
 
     companion object {
@@ -26,11 +24,7 @@ class MatchService : Service() {
         private const val TAG = "MatchService"
     }
 
-    inner class LocalBinder : Binder() {
-        fun getService(): MatchService = this@MatchService
-    }
-
-    override fun onBind(intent: Intent?): IBinder = binder
+    override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onCreate() {
         super.onCreate()

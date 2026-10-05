@@ -6,7 +6,6 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
-import android.os.Binder
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
@@ -17,7 +16,6 @@ import de.knesch.handball.referee.presentation.MainActivity
 
 class MatchService : Service() {
 
-    private val binder = LocalBinder()
     private var isStarted = false
 
     companion object {
@@ -26,11 +24,7 @@ class MatchService : Service() {
         private const val TAG = "MatchService"
     }
 
-    inner class LocalBinder : Binder() {
-        fun getService(): MatchService = this@MatchService
-    }
-
-    override fun onBind(intent: Intent?): IBinder = binder
+    override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -40,8 +34,12 @@ class MatchService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Log.i(TAG, "MatchService onStartCommand, isStarted=$isStarted, action=${intent?.action}")
-        
+
         if (intent?.action == "STOP") {
+            if (!isStarted) {
+                val notification = createNotification()
+                startForeground(NOTIFICATION_ID, notification)
+            }
             stopService()
             return START_NOT_STICKY
         }
@@ -69,8 +67,10 @@ class MatchService : Service() {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
         }
         val pendingIntent = PendingIntent.getActivity(
-            this, 0, intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            this,
+            0,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
         )
 
         val scoreText = "${spiel.goalsHomeTeam}:${spiel.goalsGuestTeam}"
@@ -96,7 +96,9 @@ class MatchService : Service() {
             .build()
 
         val ongoingActivity = OngoingActivity.Builder(
-            applicationContext, NOTIFICATION_ID, notificationBuilder
+            applicationContext,
+            NOTIFICATION_ID,
+            notificationBuilder,
         )
             .setStaticIcon(R.drawable.ic_ongoing_activity)
             .setTouchIntent(pendingIntent)

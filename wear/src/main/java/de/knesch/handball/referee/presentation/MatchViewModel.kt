@@ -61,10 +61,8 @@ class MatchViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun stopMatchService() {
         Log.i("MatchViewModel", "stopMatchService called")
-        val intent = Intent(getApplication(), MatchService::class.java).apply {
-            action = "STOP"
-        }
-        getApplication<Application>().startForegroundService(intent)
+        val intent = Intent(getApplication(), MatchService::class.java)
+        getApplication<Application>().stopService(intent)
     }
 
     private fun updateMatchService() {

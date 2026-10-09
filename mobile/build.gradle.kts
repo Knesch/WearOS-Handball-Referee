@@ -13,6 +13,16 @@ if (localPropertiesFile.exists()) {
     }
 }
 
+val versionProperties = Properties()
+val versionPropertiesFile = rootProject.file("version.properties")
+if (versionPropertiesFile.exists()) {
+    versionPropertiesFile.inputStream().use {
+        versionProperties.load(it)
+    }
+}
+val appVersionCode = (versionProperties["VERSION_CODE"] as? String)?.toInt() ?: 13
+val appVersionName = (versionProperties["VERSION_NAME"] as? String) ?: "1.6.0"
+
 android {
     namespace = "de.knesch.handball.referee"
     compileSdk = 37
@@ -21,8 +31,8 @@ android {
         applicationId = "de.knesch.handball.referee"
         minSdk = 26
         targetSdk = 37
-        versionCode = 12
-        versionName = "1.6.0"
+        versionCode = appVersionCode
+        versionName = appVersionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

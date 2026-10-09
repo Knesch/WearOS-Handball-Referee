@@ -1,0 +1,12 @@
+<resources>
+    <string name="install_on_watch">Zainstaluj na smartwatchu</string>
+    <string name="no_watches_found">Nie znaleziono połączonych zegarków.</string>
+    <string name="refresh_list">Odśwież listę</string>
+    <string name="app_installed">Zainstalowano</string>
+    <string name="app_not_installed">Nie zainstalowano</string>
+    <string name="choose_language">Wybierz język</string>
+    <string name="language_german">Niemiecki</string>
+    <string name="language_english">Angielski</string>
+    <string name="search_again">Szukaj ponownie</string>
+    <string name="installed_desc">Zainstalowano</string>
+</resources>

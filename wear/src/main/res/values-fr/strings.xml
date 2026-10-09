@@ -1,0 +1,25 @@
+<resources>
+    <string name="team_home">Domicile</string>
+    <string name="team_guest">Extérieur</string>
+    <string name="menu_title">Menu</string>
+    <string name="action_halftime">Mi-temps</string>
+    <string name="action_reset">Réinitialiser</string>
+    <string name="dialog_reset_title">Réinitialiser le match ?</string>
+    <string name="dialog_reset_message">Voulez-vous vraiment effacer tous les buts et le temps ?</string>
+    <string name="dialog_yes">Oui</string>
+    <string name="dialog_no">Non</string>
+    <string name="action_back">Retour</string>
+    <string name="to_the_game">Au match</string>
+    <string name="start_config">Configuration</string>
+    <string name="display_mode">Mode d\'affichage</string>
+    <string name="display_mode_always_on">Toujours activé</string>
+    <string name="display_mode_ongoing">Activité en cours</string>
+    <string name="restart_dialog_title">Redémarrer l\'application ?</string>
+    <string name="restart_dialog_message">Le mode a été modifié. L\'application doit être redémarrée pour appliquer les modifications.</string>
+    <string name="tile_label">Score de handball</string>
+    <string name="complication_label">Score de handball</string>
+    <string name="complication_time_label">Temps de match</string>
+    <string name="tile_status_running">Match en cours</string>
+    <string name="tile_status_paused">Match en pause</string>
+    <string name="dialog_adjust_time_title">Ajuster le temps</string>
+</resources>

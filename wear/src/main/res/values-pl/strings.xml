@@ -1,0 +1,25 @@
+<resources>
+    <string name="team_home">Dom</string>
+    <string name="team_guest">Gość</string>
+    <string name="menu_title">Menu</string>
+    <string name="action_halftime">Przerwa</string>
+    <string name="action_reset">Reset</string>
+    <string name="dialog_reset_title">Zresetować mecz?</string>
+    <string name="dialog_reset_message">Czy na pewno chcesz usunąć wszystkie bramki i czas?</string>
+    <string name="dialog_yes">Tak</string>
+    <string name="dialog_no">Nie</string>
+    <string name="action_back">Wstecz</string>
+    <string name="to_the_game">Do meczu</string>
+    <string name="start_config">Konfiguracja</string>
+    <string name="display_mode">Tryb wyświetlania</string>
+    <string name="display_mode_always_on">Zawsze włączony</string>
+    <string name="display_mode_ongoing">Bieżąca aktywność</string>
+    <string name="restart_dialog_title">Uruchomić ponownie?</string>
+    <string name="restart_dialog_message">Tryb został zmieniony. Aplikacja musi zostać uruchomiona ponownie, aby zastosować zmiany.</string>
+    <string name="tile_label">Wynik w piłce ręcznej</string>
+    <string name="complication_label">Wynik w piłce ręcznej</string>
+    <string name="complication_time_label">Czas meczu</string>
+    <string name="tile_status_running">Mecz w tracie</string>
+    <string name="tile_status_paused">Mecz wstrzymany</string>
+    <string name="dialog_adjust_time_title">Skoryguj czas</string>
+</resources>

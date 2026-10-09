@@ -1,0 +1,25 @@
+<resources>
+    <string name="team_home">Hjemme</string>
+    <string name="team_guest">Ude</string>
+    <string name="menu_title">Menu</string>
+    <string name="action_halftime">Halvleg</string>
+    <string name="action_reset">Nulstil</string>
+    <string name="dialog_reset_title">Nulstil kamp?</string>
+    <string name="dialog_reset_message">Vil du virkelig slette alle mål og tiden?</string>
+    <string name="dialog_yes">Ja</string>
+    <string name="dialog_no">Nej</string>
+    <string name="action_back">Tilbage</string>
+    <string name="to_the_game">Til kampen</string>
+    <string name="start_config">Konfiguration</string>
+    <string name="display_mode">Visningstilstand</string>
+    <string name="display_mode_always_on">Altid tændt</string>
+    <string name="display_mode_ongoing">Igangværende aktivitet</string>
+    <string name="restart_dialog_title">Genstart app?</string>
+    <string name="restart_dialog_message">Tilstanden er ændret. Appen skal genstartes for at anvende ændringerne.</string>
+    <string name="tile_label">Håndboldstilling</string>
+    <string name="complication_label">Håndboldstilling</string>
+    <string name="complication_time_label">Håndbold spilletid</string>
+    <string name="tile_status_running">Kamp kører</string>
+    <string name="tile_status_paused">Kamp sat på pause</string>
+    <string name="dialog_adjust_time_title">Juster tid</string>
+</resources>

@@ -1,0 +1,25 @@
+<resources>
+    <string name="team_home">Casa</string>
+    <string name="team_guest">Visitante</string>
+    <string name="menu_title">Menu</string>
+    <string name="action_halftime">Intervalo</string>
+    <string name="action_reset">Redefinir</string>
+    <string name="dialog_reset_title">Redefinir partida?</string>
+    <string name="dialog_reset_message">Deseja realmente limpar todos os gols e o tempo?</string>
+    <string name="dialog_yes">Sim</string>
+    <string name="dialog_no">Não</string>
+    <string name="action_back">Voltar</string>
+    <string name="to_the_game">Para a partida</string>
+    <string name="start_config">Configuração</string>
+    <string name="display_mode">Modo de exibição</string>
+    <string name="display_mode_always_on">Sempre ligado</string>
+    <string name="display_mode_ongoing">Atividade em andamento</string>
+    <string name="restart_dialog_title">Reiniciar aplicativo?</string>
+    <string name="restart_dialog_message">O modo foi alterado. O aplicativo precisa ser reiniciado para aplicar as alterações.</string>
+    <string name="tile_label">Placar de handebol</string>
+    <string name="complication_label">Placar de handebol</string>
+    <string name="complication_time_label">Tempo de partida</string>
+    <string name="tile_status_running">Partida em andamento</string>
+    <string name="tile_status_paused">Partida pausada</string>
+    <string name="dialog_adjust_time_title">Ajustar tempo</string>
+</resources>

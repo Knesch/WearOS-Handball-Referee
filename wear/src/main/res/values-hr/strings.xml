@@ -1,0 +1,25 @@
+<resources>
+    <string name="team_home">Domaći</string>
+    <string name="team_guest">Gosti</string>
+    <string name="menu_title">Izbornik</string>
+    <string name="action_halftime">Poluvrijeme</string>
+    <string name="action_reset">Reset</string>
+    <string name="dialog_reset_title">Resetirati utakmicu?</string>
+    <string name="dialog_reset_message">Želite li zaista obrisati sve golove i vrijeme?</string>
+    <string name="dialog_yes">Da</string>
+    <string name="dialog_no">Ne</string>
+    <string name="action_back">Natrag</string>
+    <string name="to_the_game">Na utakmicu</string>
+    <string name="start_config">Konfiguracija</string>
+    <string name="display_mode">Način prikaza</string>
+    <string name="display_mode_always_on">Uvijek uključeno</string>
+    <string name="display_mode_ongoing">Tijek aktivnosti</string>
+    <string name="restart_dialog_title">Ponovo pokrenuti?</string>
+    <string name="restart_dialog_message">Način rada je promijenjen. Aplikaciju je potrebno ponovo pokrenuti.</string>
+    <string name="tile_label">Rukometni rezultat</string>
+    <string name="complication_label">Rukometni rezultat</string>
+    <string name="complication_time_label">Vrijeme utakmice</string>
+    <string name="tile_status_running">Utakmica traje</string>
+    <string name="tile_status_paused">Utakmica pauzirana</string>
+    <string name="dialog_adjust_time_title">Prilagodi vrijeme</string>
+</resources>

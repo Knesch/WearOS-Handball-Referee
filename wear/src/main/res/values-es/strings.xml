@@ -1,0 +1,25 @@
+<resources>
+    <string name="team_home">Local</string>
+    <string name="team_guest">Visitante</string>
+    <string name="menu_title">Menú</string>
+    <string name="action_halftime">Media parte</string>
+    <string name="action_reset">Restablecer</string>
+    <string name="dialog_reset_title">¿Restablecer partido?</string>
+    <string name="dialog_reset_message">¿Realmente quieres borrar todos los goles y el tiempo?</string>
+    <string name="dialog_yes">Sí</string>
+    <string name="dialog_no">No</string>
+    <string name="action_back">Volver</string>
+    <string name="to_the_game">Al partido</string>
+    <string name="start_config">Configuración</string>
+    <string name="display_mode">Modo de visualización</string>
+    <string name="display_mode_always_on">Siempre encendido</string>
+    <string name="display_mode_ongoing">Actividad en curso</string>
+    <string name="restart_dialog_title">¿Reiniciar aplicación?</string>
+    <string name="restart_dialog_message">El modo ha cambiado. La aplicación debe reiniciarse para aplicar los cambios.</string>
+    <string name="tile_label">Resultado de balonmano</string>
+    <string name="complication_label">Resultado de balonmano</string>
+    <string name="complication_time_label">Tiempo de partido</string>
+    <string name="tile_status_running">Partido en curso</string>
+    <string name="tile_status_paused">Partido pausado</string>
+    <string name="dialog_adjust_time_title">Ajustar tiempo</string>
+</resources>

@@ -1,0 +1,12 @@
+<resources>
+    <string name="install_on_watch">Installer sur la montre</string>
+    <string name="no_watches_found">Aucune montre connectée trouvée.</string>
+    <string name="refresh_list">Actualiser la liste</string>
+    <string name="app_installed">Installé</string>
+    <string name="app_not_installed">Non installé</string>
+    <string name="choose_language">Choisir la langue</string>
+    <string name="language_german">Allemand</string>
+    <string name="language_english">Anglais</string>
+    <string name="search_again">Rechercher à nouveau</string>
+    <string name="installed_desc">Installé</string>
+</resources>

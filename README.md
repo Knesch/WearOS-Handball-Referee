@@ -44,6 +44,7 @@ klassische Notizkarte oder das Tape auf dem Uhrarmband verwendet werden.
 * **Standalone App**: Funktioniert völlig unabhängig vom Smartphone.
 * **Tile & Complication**: Schneller Zugriff auf die App und Status-Informationen direkt vom
   Zifferblatt.
+* **Mehrsprachigkeit**: Unterstützt Deutsch, Englisch, Dänisch, Schwedisch, Norwegisch, Französisch, Spanisch, Polnisch, Kroatisch und Portugiesisch (Brasilien).
 
 ## Features (Companion App - Smartphone)
 
@@ -124,6 +125,7 @@ I am always happy to receive feedback and feature requests.
 * **Navigation**: Intuitive control via buttons and the typical Wear OS swipe gesture to return.
 * **Standalone App**: Works completely independently of the smartphone.
 * **Tile & Complication**: Quick access to the app and status information directly from the watch face.
+* **Localization**: Supports German, English, Danish, Swedish, Norwegian, French, Spanish, Polish, Croatian, and Portuguese (Brazil).
 
 ## Features (Companion App - Smartphone)
 

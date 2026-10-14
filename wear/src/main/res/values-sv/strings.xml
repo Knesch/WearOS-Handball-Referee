@@ -1,0 +1,25 @@
+<resources>
+    <string name="team_home">Hemmalag</string>
+    <string name="team_guest">Bortalag</string>
+    <string name="menu_title">Meny</string>
+    <string name="action_halftime">Halvtid</string>
+    <string name="action_reset">Återställ</string>
+    <string name="dialog_reset_title">Återställ match?</string>
+    <string name="dialog_reset_message">Vill du verkligen rensa alla mål och tiden?</string>
+    <string name="dialog_yes">Ja</string>
+    <string name="dialog_no">Nej</string>
+    <string name="action_back">Tillbaka</string>
+    <string name="to_the_game">Till matchen</string>
+    <string name="start_config">Konfiguration</string>
+    <string name="display_mode">Visningsläge</string>
+    <string name="display_mode_always_on">Alltid på</string>
+    <string name="display_mode_ongoing">Pågående aktivitet</string>
+    <string name="restart_dialog_title">Starta om appen?</string>
+    <string name="restart_dialog_message">Läget har ändrats. Appen måste startas om för att tillämpa ändringarna.</string>
+    <string name="tile_label">Handbollsresultat</string>
+    <string name="complication_label">Handbollsresultat</string>
+    <string name="complication_time_label">Handboll matchtid</string>
+    <string name="tile_status_running">Matchen igång</string>
+    <string name="tile_status_paused">Matchen pausad</string>
+    <string name="dialog_adjust_time_title">Justera tid</string>
+</resources>

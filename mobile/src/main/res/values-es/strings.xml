@@ -1,0 +1,12 @@
+<resources>
+    <string name="install_on_watch">Instalar en el reloj inteligente</string>
+    <string name="no_watches_found">No se encontraron relojes conectados.</string>
+    <string name="refresh_list">Actualizar lista</string>
+    <string name="app_installed">Instalado</string>
+    <string name="app_not_installed">No instalado</string>
+    <string name="choose_language">Elegir idioma</string>
+    <string name="language_german">Alemán</string>
+    <string name="language_english">Inglés</string>
+    <string name="search_again">Buscar de nuevo</string>
+    <string name="installed_desc">Instalado</string>
+</resources>

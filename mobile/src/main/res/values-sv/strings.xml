@@ -1,0 +1,12 @@
+<resources>
+    <string name="install_on_watch">Installera på smartwatch</string>
+    <string name="no_watches_found">Inga anslutna klockor hittades.</string>
+    <string name="refresh_list">Uppdatera lista</string>
+    <string name="app_installed">Installerad</string>
+    <string name="app_not_installed">Inte installerad</string>
+    <string name="choose_language">Välj språk</string>
+    <string name="language_german">Tyska</string>
+    <string name="language_english">Engelska</string>
+    <string name="search_again">Sök igen</string>
+    <string name="installed_desc">Installerad</string>
+</resources>

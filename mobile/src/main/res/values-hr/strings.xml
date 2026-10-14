@@ -1,0 +1,12 @@
+<resources>
+    <string name="install_on_watch">Instaliraj na pametni sat</string>
+    <string name="no_watches_found">Nema pronađenih povezanih satova.</string>
+    <string name="refresh_list">Osvježi popis</string>
+    <string name="app_installed">Instalirano</string>
+    <string name="app_not_installed">Nije instalirano</string>
+    <string name="choose_language">Odaberi jezik</string>
+    <string name="language_german">Njemački</string>
+    <string name="language_english">Engleski</string>
+    <string name="search_again">Pretraži ponovno</string>
+    <string name="installed_desc">Instalirano</string>
+</resources>

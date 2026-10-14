@@ -1,0 +1,12 @@
+<resources>
+    <string name="install_on_watch">Installer på smartklokke</string>
+    <string name="no_watches_found">Ingen tilkoblede klokker funnet.</string>
+    <string name="refresh_list">Oppdater liste</string>
+    <string name="app_installed">Installert</string>
+    <string name="app_not_installed">Ikke installert</string>
+    <string name="choose_language">Velg språk</string>
+    <string name="language_german">Tysk</string>
+    <string name="language_english">Engelsk</string>
+    <string name="search_again">Søk igjen</string>
+    <string name="installed_desc">Installert</string>
+</resources>
